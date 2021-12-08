@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행 할 쿼리 문을 저장하는 파일. 테이블 하나당 한개씩 작성
+namespace: 작업하는 테이블들을 구분해주기 위한 식별자 -->
+<mapper namespace="com.happy.dao.MemberDao">
+
+	<insert id="registerMember" parameterType="Member" >
+	insert into member(userid,userpwd,username,email,address) 
+	values(#{userid},#{userpwd},#{username},#{email},#{address})
+	</insert>
+	
+	<select id="login" parameterType="map" resultType="Member">
+		select * from member 
+		where userid= #{userid} and userpwd =#{userpwd}
+	</select>
+	
+	<select id="getMember" parameterType="java.lang.String" resultType="Member" >
+		select * from member 
+		where userid= #{userid}
+	</select>
+	
+	
+	<update id="modifyMember" parameterType="Member" >
+		update member set 
+		userpwd =#{userpwd}, username=#{username},
+		email=#{email},address= #{address} 
+		where userid=#{userid}
+	</update>
+  
+  	<delete id="deleteMember" parameterType="java.lang.String">
+  		delete from member 
+  		where userid = #{userid}
+  	</delete>
+  
+</mapper>
+
+
+
+
+
+

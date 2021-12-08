@@ -1,0 +1,24 @@
+package com.happy.interceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.happy.vo.Member;
+
+@Component
+public class ConfirmInterceptor extends HandlerInterceptorAdapter {
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		HttpSession session = request.getSession();
+		Member memberDto = (Member) session.getAttribute("id");
+		if(memberDto != null || memberDto.getUserid().equals("admin")) {
+			return true;
+		}
+		return false;
+	}
+}

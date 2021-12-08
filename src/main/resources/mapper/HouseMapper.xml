@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행 할 쿼리 문을 저장하는 파일. 테이블 하나당 한개씩 작성
+namespace: 작업하는 테이블들을 구분해주기 위한 식별자 -->
+<mapper namespace="com.happy.dao.HouseDao">
+
+ <select id="getHouseDealsDong" parameterType="Dongcode" resultType="HouseDeal">
+ SELECT * FROM housedeal
+	WHERE code = #{dongcode}
+ </select>
+ 
+ <select id="getHouseDeals" parameterType="string" resultType="HouseDeal">
+ SELECT * FROM housedeal WHERE AptName like concat('%',#{name},'%')
+ </select>
+ 
+ <select id="getHouseInfoDong" parameterType="Dongcode" resultType="HouseInfo">
+ SELECT * FROM houseinfo 
+	WHERE code = #{dongcode}
+	
+ </select>
+ 
+ <select id="getHouseInfo" parameterType="string" resultType="HouseInfo">
+ SELECT * FROM houseinfo WHERE AptName like concat('%',#{name},'%')
+ </select>
+
+	<select id="getCity" resultType="SidoCode">
+		select *from sidocode;
+	</select>
+	
+	<select id="getGugun" parameterType="string" resultType="Guguncode">
+		select *from guguncode 
+		where gugun_code like concat(#{citycode},'%')
+	</select>
+	<select id="getDong" parameterType="string" resultType="Dongcode">
+		select *from dongcode
+		where gugun like #{gugun}
+	</select>
+	
+	<select id="selectOne" parameterType="string" resultType="Dongcode">
+		select * from dongcode
+		where dong = #{dong}
+	</select>
+</mapper>
+
+
+
+
+
+
